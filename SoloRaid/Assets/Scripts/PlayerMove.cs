@@ -12,6 +12,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Animator animator;
     private bool isMoving = false;
 
+
+    [Header("Dodge Setting")]
+    [SerializeField] float dodgeForce;
+    [SerializeField] float dodgeDuration = 0.5f;
+    [SerializeField] float dodgeCooldown = 5f;
+    private bool isDodging = false;
+    bool canDodge = true;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,7 +30,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))                    // 마우스 클릭하면 해당 위치로 이동
         {
             animator.SetBool("IsMove", true);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -34,6 +42,23 @@ public class PlayerMove : MonoBehaviour
                 //Debug.Log("Target Position: " + targetPosition);
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space) && !isDodging && canDodge)          // 스페이스바 누르면 회피 동작
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))              //마우스 우클릭 위치
+            { 
+                Vector3 dodgeTarget = hit.point;
+                Vector3 dodgeDirection = (dodgeTarget - transform.position);
+                dodgeDirection.y = 0;                        // 수직 무시
+
+                if(dodgeDirection.sqrMagnitude > 0.01f)
+                {
+                    StartCoroutine(Dodge(dodgeDirection.normalized));
+                }
+            }
+        }
         if (animator.GetBool("IsMove") && !isMoving)            // 이건 한번 강사님 수정 요청 해보자
         {
             animator.SetBool("IsMove", false);
@@ -43,6 +68,8 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isDodging)               // 회피 중일 때는 이동하지 않음
+            return;
         if (isMoving)               // 마우스 우클릭 시 이동 및 거리 계산 로직
         {
             Vector3 direction = (targetPosition - transform.position);      // 목표 위치 - 현재 위치  = 벡터
@@ -66,4 +93,28 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    IEnumerator Dodge(Vector3 direction)
+    {
+        isDodging = true;
+        isMoving = false;
+        rb.linearVelocity = Vector3.zero;
+
+        animator.SetTrigger("Dodge");
+        animator.SetBool("IsMove", false);
+
+        transform.forward = direction;          // 회피 방향으로 캐릭터 회전
+
+        rb.AddForce(direction * dodgeForce, ForceMode.Impulse);    // 회피 힘 가하기
+
+        yield return new WaitForSeconds(dodgeDuration);    // 회피 지속 시간 대기
+
+        rb.linearVelocity = Vector3.zero;          // 회피 후 속도 초기화
+
+        isDodging = false;
+    }
+    IEnumerator DodgeCooldown()
+    {
+        yield return new WaitForSeconds(dodgeCooldown);
+        isDodging = false;
+    }
 }
