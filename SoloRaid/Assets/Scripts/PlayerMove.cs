@@ -2,15 +2,14 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
 
-
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Vector3 targetPosition;
-    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] private Animator animator;
-    private bool isMoving = false;
+    private bool isMoving = false;   
 
 
     [Header("Dodge Setting")]
@@ -18,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float dodgeDuration = 0.5f;
     [SerializeField] float dodgeCooldown = 5f;
     private bool isDodging = false;
-    bool canDodge = true;
+    private bool canDodge = true;
 
     void Awake()
     {
@@ -27,6 +26,24 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    // 이벤트 구독 및 구독 해지를 위한 메서드입니다.
+    // 오브젝트가 활성화될 때 쿨타임 종료 이벤트를 구독하고, 비활성화될 때 해지하여 메모리 누수를 방지합니다.
+    private void OnEnable()
+    {
+        GameEvents.OnDodgeCooldownFinished += EnableDodge;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnDodgeCooldownFinished -= EnableDodge;
+    }
+
+    // --- 추가된 부분 ---
+    // 쿨타임 종료 이벤트가 발생했을 때 호출될 메서드입니다.
+    private void EnableDodge()
+    {
+        canDodge = true;
+    }
 
     void Update()
     {
@@ -48,12 +65,12 @@ public class PlayerMove : MonoBehaviour
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))              //마우스 우클릭 위치
-            { 
+            {
                 Vector3 dodgeTarget = hit.point;
                 Vector3 dodgeDirection = (dodgeTarget - transform.position);
                 dodgeDirection.y = 0;                        // 수직 무시
 
-                if(dodgeDirection.sqrMagnitude > 0.01f)
+                if (dodgeDirection.sqrMagnitude > 0.01f)
                 {
                     StartCoroutine(Dodge(dodgeDirection.normalized));
                 }
@@ -85,7 +102,7 @@ public class PlayerMove : MonoBehaviour
             Vector3 move = direction.normalized * moveSpeed * Time.fixedDeltaTime;       //흔하디 흔한 이동 공식
             rb.MovePosition(rb.position + move);                                         //리지드바디 이동
 
-            if ( direction.sqrMagnitude > 0)                                // 방향이 있을 때만 회전
+            if (direction.sqrMagnitude > 0)                                // 방향이 있을 때만 회전
             {
                 Quaternion targetRot = Quaternion.LookRotation(direction);                      // 바라보는 방향 계산
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime); // 부드럽게 회전시키기
@@ -95,8 +112,13 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator Dodge(Vector3 direction)
     {
+
         isDodging = true;
         isMoving = false;
+        canDodge = false;
+
+        GameEvents.OnDodgeStarted?.Invoke(dodgeCooldown);
+
         rb.linearVelocity = Vector3.zero;
 
         animator.SetTrigger("Dodge");
@@ -108,13 +130,10 @@ public class PlayerMove : MonoBehaviour
 
         yield return new WaitForSeconds(dodgeDuration);    // 회피 지속 시간 대기
 
-        rb.linearVelocity = Vector3.zero;          // 회피 후 속도 초기화
+        isMoving = true;
+        isDodging = false;
 
-        isDodging = false;
+        rb.linearVelocity = Vector3.zero;          // 회피 후 속도 초기화
     }
-    IEnumerator DodgeCooldown()
-    {
-        yield return new WaitForSeconds(dodgeCooldown);
-        isDodging = false;
-    }
+
 }
