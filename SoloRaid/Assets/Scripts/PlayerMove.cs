@@ -9,7 +9,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] private Animator animator;
-    private bool isMoving = false;   
+    [SerializeField] private bool isMoving = false;
+    [SerializeField] private bool isMeleeAction = false;
+    public bool IsMeleeAction { get { return isMeleeAction; } set { isMoving = value; } }
+    public bool IsMoving { get { return isMoving; } set { isMoving = value; } }
 
 
     [Header("Dodge Setting")]
@@ -31,11 +34,15 @@ public class PlayerMove : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnDodgeCooldownFinished += EnableDodge;
+        GameEvents.OnPlayerMeleeAttackStarted += EnableMove;
+        GameEvents.OnPlayerMeleeAttackEnded += EnableMove;
     }
 
     private void OnDisable()
     {
         GameEvents.OnDodgeCooldownFinished -= EnableDodge;
+        GameEvents.OnPlayerMeleeAttackStarted -= EnableMove;
+        GameEvents.OnPlayerMeleeAttackEnded -= EnableMove;
     }
 
     // --- 추가된 부분 ---
@@ -44,10 +51,16 @@ public class PlayerMove : MonoBehaviour
     {
         canDodge = true;
     }
+    private void EnableMove()
+    {
+        isMeleeAction = !isMeleeAction;
+        isMoving = !isMoving;
+        animator.SetBool("IsMove", isMoving);
+    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))                    // 마우스 클릭하면 해당 위치로 이동
+        if (Input.GetMouseButtonDown(1) && isMeleeAction == false )                    // 마우스 클릭하면 해당 위치로 이동
         {
             animator.SetBool("IsMove", true);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
