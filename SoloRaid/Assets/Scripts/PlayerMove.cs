@@ -141,7 +141,7 @@ public class PlayerMove : MonoBehaviour
 
         rb.AddForce(direction * dodgeForce, ForceMode.Impulse);    // 회피 힘 가하기
 
-        yield return new WaitForSeconds(dodgeDuration);    // 회피 지속 시간 대기
+        yield return CoroutineManager.WaitForSecond(dodgeDuration);    // 회피 지속 시간 대기
 
         isMoving = true;
         isDodging = false;

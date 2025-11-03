@@ -38,7 +38,7 @@ public class PlayerAction : MonoBehaviour
 
         transform.forward = diretion;
 
-        yield return new WaitForSeconds(1f);
+        yield return CoroutineManager.WaitForSecond(1f);
         GameEvents.OnPlayerMeleeAttackEnded?.Invoke();
 
     }

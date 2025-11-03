@@ -21,6 +21,7 @@ public class BossAi : MonoBehaviour
     [SerializeField] private List<BaseAttackPattern> attackPatterns;
     [SerializeField] private float attackCooldown = 1.5f;         // 공격 쿨타임
 
+    private float attackRangeSqr;   // 성능 최적화를 위한 공격 사거리 계산 변수
 
     public enum AIState
     {
@@ -37,6 +38,8 @@ public class BossAi : MonoBehaviour
         animator = GetComponent<Animator>();
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform; // 플레이어 정보 할당
         currentState = AIState.Idle;
+
+        attackRangeSqr = attackRange * attackRange;
     }
     private void Update()
     {
@@ -90,12 +93,14 @@ public class BossAi : MonoBehaviour
             ChangeState(AIState.Idle);
         }
         // 플레이어와의 거리 계산
-        float distanceToPlayer = Vector3.Distance(transform.position, playerPosition.position);
+        float distanceSqr = (playerPosition.position - transform.position).sqrMagnitude;
 
-        if (distanceToPlayer <= attackRange)       // 위 거리가 사정거리 내라면
+        // 제곱 값끼리 비교합니다. (제곱근 계산 없음)
+        if (distanceSqr <= attackRangeSqr)
         {
-            ChangeState(AIState.Attacking); // 공격상태
-            //ExecuteRandomAttack();        // 랜덤 공격 실행
+            // 공격 범위에 들어왔다면 공격 시작
+            ChangeState(AIState.Attacking);
+            ExecuteRandomAttack();
         }
         else
         {
@@ -142,7 +147,7 @@ public class BossAi : MonoBehaviour
         ChangeState(AIState.Cooldown);
 
         // 대기 
-        yield return new WaitForSeconds(attackCooldown);
+        yield return CoroutineManager.WaitForSecond(attackCooldown);
 
         // 혹시모를 예외처리 
         if (currentState == AIState.Cooldown)   // 지금 쿨타임 상태라면
