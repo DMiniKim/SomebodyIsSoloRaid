@@ -9,7 +9,7 @@ public class BossAi : MonoBehaviour
     [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float attackRange = 15f;       // 이거리 안에 들어오면 패턴 시작
     [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
     private bool isMoving = false;              // 공격 flag
     private bool isAttacking = false;           // 이동 flag
     public bool IsMoving { get { return isMoving; } set { isMoving = value; } }
