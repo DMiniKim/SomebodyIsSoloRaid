@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17f8a0cda1c8dc47a8600760320e909, type: 3}
+  m_Name: SectorPattern
+  m_EditorClassIdentifier: Assembly-CSharp::SectorPattern
+  warningTime: 1
+  damage: 0
+  coneLength: 10
+  coneDecalPrefab: {fileID: 1724833007424909223, guid: d829c042d54c0e64c9a5a306b5ff0a5b, type: 3}
