@@ -999,10 +999,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1438546959266459337}
   - component: {fileID: 4540229000190281644}
-  - component: {fileID: 6255150595766716997}
   - component: {fileID: 3761506984215629619}
   - component: {fileID: 2174762463837459154}
-  - component: {fileID: 1660769897724990441}
+  - component: {fileID: 2204155736115008225}
+  - component: {fileID: 3415471565983648510}
   m_Layer: 0
   m_Name: HumanMale_Character_FREE
   m_TagString: Player
@@ -1050,28 +1050,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6255150595766716997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782702501690864755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8de883e8a0b7c60459aba896f46fcb28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  moveSpeed: 3
-  rb: {fileID: 3761506984215629619}
-  targetPosition: {x: 0, y: 0, z: 0}
-  rotationSpeed: 8
-  animator: {fileID: 4540229000190281644}
-  isMoving: 0
-  isMeleeAction: 0
-  dodgeForce: 7
-  dodgeDuration: 0.5
-  dodgeCooldown: 5
 --- !u!54 &3761506984215629619
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1122,7 +1100,29 @@ CapsuleCollider:
   m_Height: 1.9316673
   m_Direction: 1
   m_Center: {x: 0, y: 0.9536915, z: 0}
---- !u!114 &1660769897724990441
+--- !u!114 &2204155736115008225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501690864755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8de883e8a0b7c60459aba896f46fcb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  moveSpeed: 5
+  rb: {fileID: 3761506984215629619}
+  targetPosition: {x: 0, y: 0, z: 0}
+  rotationSpeed: 8
+  animator: {fileID: 4540229000190281644}
+  isMoving: 0
+  isMeleeAction: 0
+  dodgeForce: 0
+  dodgeDuration: 0.5
+  dodgeCooldown: 5
+--- !u!114 &3415471565983648510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31573d197a66e8d4f88d359b7d43d2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAction
-  playerMove: {fileID: 6255150595766716997}
+  playerMove: {fileID: 2204155736115008225}
   animator: {fileID: 4540229000190281644}
   rb: {fileID: 3761506984215629619}
 --- !u!1 &1789272960074739661
@@ -6166,43 +6166,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4373275979720672731, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99134004
+      value: 0.9864899
       objectReference: {fileID: 0}
     - target: {fileID: 4373275979720672731, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.08586663
+      value: 0.0910617
       objectReference: {fileID: 0}
     - target: {fileID: 4373275979720672731, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.098021895
+      value: -0.1333481
       objectReference: {fileID: 0}
     - target: {fileID: 4373275979720672731, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.016232377
+      value: -0.027634582
       objectReference: {fileID: 0}
     - target: {fileID: 4373275979720672731, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 9.617
+      value: 9.921
       objectReference: {fileID: 0}
     - target: {fileID: 4373275979720672731, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -11.534
+      value: -15.795
       objectReference: {fileID: 0}
     - target: {fileID: 4373275979720672731, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -2.85
+      value: -4.589
       objectReference: {fileID: 0}
     - target: {fileID: 4652329526155746318, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.37395784
+      value: -0.374
       objectReference: {fileID: 0}
     - target: {fileID: 4652329526155746318, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.15582827
+      value: -0.159
       objectReference: {fileID: 0}
     - target: {fileID: 4652329526155746318, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.021617994
+      value: -0.043
       objectReference: {fileID: 0}
     - target: {fileID: 4652329526155746318, guid: 7e54203ab234dfd44b6720b9cca8644c, type: 3}
       propertyPath: m_LocalRotation.w
