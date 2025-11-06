@@ -8,8 +8,11 @@ public class JumpAndDownPattern : BaseAttackPattern
     [SerializeField] private float trackingTime = 2.0f;     //점프 할 동안 서칭 시간
     [SerializeField] private float slamRadius = 5f;     // 공격 반경
     [SerializeField] private GameObject jumpSlamPrefab;
-
     
+    private void Awake()
+    {
+        patternName = "JumpAndDownPattern";
+    }
 
     public override IEnumerator Execute(BossAi controller)
     {

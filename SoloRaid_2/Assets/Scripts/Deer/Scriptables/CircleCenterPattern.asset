@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CircleCenterPattern
   warningTime: 1.5
   damage: 0
+  patternName: CircleCenterPattern
   attackRadius: 5
-  CircleDecalFab: {fileID: 7169956881161850549, guid: 4ddee89b463f2e64baf6532d746fb8fa, type: 3}
+  CircleDecalFab: {fileID: 5701749304584938665, guid: 7ad34c0a6f2734749a249a9d049b743d, type: 3}

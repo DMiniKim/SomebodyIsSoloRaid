@@ -17,8 +17,8 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Dodge Setting")]
     [SerializeField] float dodgeForce;
-    [SerializeField] float dodgeDuration = 0.5f;
-    [SerializeField] float dodgeCooldown = 5f;
+    [SerializeField] float dodgeDuration;
+    [SerializeField] float dodgeCooldown;
     private bool isDodging = false;
     private bool canDodge = true;
 
@@ -27,6 +27,9 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         targetPosition = transform.position;
         animator = GetComponent<Animator>();
+        dodgeForce = 7f;
+        dodgeDuration = 0.5f;
+        dodgeCooldown = 5f;
     }
 
     // 이벤트 구독 및 구독 해지를 위한 메서드입니다.
@@ -60,7 +63,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && isMeleeAction == false )                    // 마우스 클릭하면 해당 위치로 이동
+        if (Input.GetMouseButtonDown(1) && isMeleeAction == false)                    // 마우스 클릭하면 해당 위치로 이동
         {
             animator.SetBool("IsMove", true);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

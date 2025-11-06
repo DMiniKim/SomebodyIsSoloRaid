@@ -31,6 +31,7 @@ public class BossAi : MonoBehaviour
         Cooldown
     }
     public AIState currentState;
+    public string currentPattern;
 
     private void Awake()
     {
@@ -122,7 +123,7 @@ public class BossAi : MonoBehaviour
         ChangeState(AIState.Attacking);
         animator.SetBool("IsMove", false);
         rb.linearVelocity = Vector3.zero;
-        
+
 
         // 예외 처리
         if (attackPatterns.Count == 0)
@@ -134,6 +135,8 @@ public class BossAi : MonoBehaviour
 
         int randomIndex = Random.Range(0, attackPatterns.Count);
         BaseAttackPattern select = attackPatterns[randomIndex];
+        
+        currentPattern = select.PatternName;
 
         StartCoroutine(AttackCoroutine(select));
     }
@@ -152,7 +155,7 @@ public class BossAi : MonoBehaviour
         // 혹시모를 예외처리 
         if (currentState == AIState.Cooldown)   // 지금 쿨타임 상태라면
         {
-             ChangeState(AIState.Chasing);
+            ChangeState(AIState.Chasing);
         }
     }
 

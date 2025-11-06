@@ -13,6 +13,7 @@ public class CircleCenterPattern : BaseAttackPattern
     private void Awake()
     {
         base.warningTime = 1.5f;
+        patternName = "CircleCenterPattern";
     }
 
     public override IEnumerator Execute(BossAi controller)

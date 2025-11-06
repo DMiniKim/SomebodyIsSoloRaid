@@ -245,6 +245,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3384827773404303409, guid: fa9b3057ee026bb41a40d9f7eabfef7c, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384827773404303409, guid: fa9b3057ee026bb41a40d9f7eabfef7c, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384827773404303409, guid: fa9b3057ee026bb41a40d9f7eabfef7c, type: 3}
+      propertyPath: m_StitchLightmapSeams
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3615299149272416980, guid: fa9b3057ee026bb41a40d9f7eabfef7c, type: 3}
       propertyPath: m_Name
       value: Cliff 2
@@ -919,13 +931,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5180955143276411791, guid: 2f4761d667a4a7e4695cf04bad112c76, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 778770152}
+    - targetCorrespondingSourceObject: {fileID: 5180955143276411791, guid: 2f4761d667a4a7e4695cf04bad112c76, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 778770151}
     - targetCorrespondingSourceObject: {fileID: 5180955143276411791, guid: 2f4761d667a4a7e4695cf04bad112c76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 778770150}
-    - targetCorrespondingSourceObject: {fileID: 5180955143276411791, guid: 2f4761d667a4a7e4695cf04bad112c76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 778770152}
   m_SourcePrefab: {fileID: 100100000, guid: 2f4761d667a4a7e4695cf04bad112c76, type: 3}
 --- !u!1001 &238989231
 PrefabInstance:
@@ -2966,12 +2978,10 @@ MonoBehaviour:
   rotationSpeed: 5
   animator: {fileID: 0}
   attackPatterns:
-  - {fileID: 11400000, guid: e7984e17d98231746bf56b6c588c21d2, type: 2}
-  - {fileID: 11400000, guid: 7a874fa955a9f0c4dafb4c68057573ef, type: 2}
   - {fileID: 11400000, guid: 812c15a0692b7194ab90bd727341cd7d, type: 2}
-  - {fileID: 11400000, guid: 165924bff83e0ba4a87815266b779ef3, type: 2}
   attackCooldown: 1.5
   currentState: 0
+  currentPattern: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -4791,6 +4801,10 @@ PrefabInstance:
     - target: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2204155736115008225, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: moveSpeed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6619,10 +6633,10 @@ SceneRoots:
   - {fileID: 2095073551}
   - {fileID: 832575519}
   - {fileID: 270945449}
-  - {fileID: 1370124204}
   - {fileID: 773387836}
-  - {fileID: 1949234883}
+  - {fileID: 1370124204}
   - {fileID: 231763340}
   - {fileID: 1327303011}
   - {fileID: 270503563}
   - {fileID: 549103130}
+  - {fileID: 1949234883}

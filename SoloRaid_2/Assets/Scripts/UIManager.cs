@@ -48,8 +48,7 @@ public class UIManager : MonoBehaviour
     // 쿨타임이 업데이트될 때 텍스트를 갱신하는 메서드
     private void UpdateCooldownText(float currentTime)
     {
-        Debug.Log(currentTime);       
-
+        
         if (currentTime < 0) currentTime = 0;
         // 소수점 한 자리까지 표시하거나, 올림 처리를 하는 등 다양하게 표현할 수 있습니다.
         textTime.text = Mathf.Ceil(currentTime).ToString("F0"); // --- 수정된 부분 ---: currentTime을 매 프레임 업데이트된 값으로 사용합니다.

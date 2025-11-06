@@ -10,7 +10,10 @@ public class SectorPattern : BaseAttackPattern
 
     // 생성된 장판을 저장할 변수
     private GameObject spawnedDecal;
-
+    private void Awake()
+    {
+        patternName = "SectorPattern";
+    }
     public override IEnumerator Execute(BossAi controller)
     {
         // 1. 준비 (플레이어 방향으로 회전)

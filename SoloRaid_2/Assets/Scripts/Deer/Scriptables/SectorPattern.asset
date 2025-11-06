@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SectorPattern
   warningTime: 1
   damage: 0
+  patternName: SectorPattern
   coneLength: 10
-  coneDecalPrefab: {fileID: 1724833007424909223, guid: d829c042d54c0e64c9a5a306b5ff0a5b, type: 3}
+  coneDecalPrefab: {fileID: 4280598433514986280, guid: 4d868501d9fd59149bc2e147cafc65ec, type: 3}
