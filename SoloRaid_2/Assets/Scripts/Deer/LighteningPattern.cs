@@ -10,6 +10,7 @@ public class LighteningPattern : BaseAttackPattern
     [SerializeField] private int strikeCount = 5;  //낙뢰 개수
     [SerializeField] private float patternRadius;  // 보스 중심 범위
     [SerializeField] private float intervalTime = 0.3f;  // 낙뢰 떨어지는 간격
+    [SerializeField] private float attackTerm = 0.5f;
     [SerializeField] private GameObject lightningPrefab;
 
     [SerializeField] private float strikeRadius;// 1발 반경
@@ -24,7 +25,8 @@ public class LighteningPattern : BaseAttackPattern
     {
         patternName = "LighteningPattern";
         patternRadius = 10f;
-        strikeRadius = 0.1f;
+        strikeRadius = 1f;
+        attackTerm = 0.5f;
     }
     public override IEnumerator Execute(BossAi controller)
     {
@@ -95,10 +97,9 @@ public class LighteningPattern : BaseAttackPattern
         foreach(Renderer rend in childRenderers)
         {
             rend.material.color = targetColor;
-        }
-       
+        }       
 
-        yield return CoroutineManager.WaitForSecond(warningTime);
+        yield return CoroutineManager.WaitForSecond(attackTerm);
 
         // 데미지 연산
 

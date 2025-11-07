@@ -18,6 +18,7 @@ MonoBehaviour:
   strikeCount: 5
   patternRadius: 10
   intervalTime: 0.5
+  attackTerm: 0.5
   lightningPrefab: {fileID: 5701749304584938665, guid: 7ad34c0a6f2734749a249a9d049b743d, type: 3}
   strikeRadius: 1
   startScalePercent: 0.3

@@ -16,5 +16,5 @@ MonoBehaviour:
   damage: 0
   patternName: JumpAndDownPattern
   trackingTime: 2
-  slamRadius: 5
+  slamRadius: 2
   jumpSlamPrefab: {fileID: 5701749304584938665, guid: 7ad34c0a6f2734749a249a9d049b743d, type: 3}

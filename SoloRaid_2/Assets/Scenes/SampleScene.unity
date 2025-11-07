@@ -2977,8 +2977,9 @@ MonoBehaviour:
   attackRange: 10
   rotationSpeed: 5
   animator: {fileID: 0}
+  rb: {fileID: 0}
   attackPatterns:
-  - {fileID: 11400000, guid: 812c15a0692b7194ab90bd727341cd7d, type: 2}
+  - {fileID: 11400000, guid: 7a874fa955a9f0c4dafb4c68057573ef, type: 2}
   attackCooldown: 1.5
   currentState: 0
   currentPattern: 

@@ -15,7 +15,7 @@ public class BossAi : MonoBehaviour
     public bool IsMoving { get { return isMoving; } set { isMoving = value; } }
     public bool IsAttacking { get { return isAttacking; } set { isAttacking = value; } }
 
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     // 패턴 담을 리스트
     [SerializeField] private List<BaseAttackPattern> attackPatterns;
@@ -157,6 +157,13 @@ public class BossAi : MonoBehaviour
         {
             ChangeState(AIState.Chasing);
         }
+    }
+
+
+    public void Jump()
+    {
+        rb.useGravity = false;
+       rb.AddForce(Vector3.up * 100f, ForceMode.Impulse);
     }
 
 }
