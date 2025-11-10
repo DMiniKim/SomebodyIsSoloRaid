@@ -16,4 +16,6 @@ MonoBehaviour:
   damage: 0
   patternName: SectorPattern
   coneLength: 10
-  coneDecalPrefab: {fileID: 4280598433514986280, guid: 4d868501d9fd59149bc2e147cafc65ec, type: 3}
+  coneDecalPrefab: {fileID: 3615608205645983771, guid: 9c52671d34fd2424dbdf5faac508da41, type: 3}
+  rotation: {x: 0.007985918, y: -0.765175, z: 0.009492926, w: 0.64370286}
+  getVector: {fileID: 8739232958739172736, guid: 9c52671d34fd2424dbdf5faac508da41, type: 3}

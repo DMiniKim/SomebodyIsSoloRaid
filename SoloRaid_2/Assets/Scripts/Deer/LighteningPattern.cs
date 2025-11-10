@@ -44,7 +44,7 @@ public class LighteningPattern : BaseAttackPattern
 
             controller.StartCoroutine(StrikeCoroutine(strikePos));
         }
-
+        controller.animator.SetTrigger("LightningAttack");
         yield return CoroutineManager.WaitForSecond(intervalTime);
     }
 
@@ -75,7 +75,7 @@ public class LighteningPattern : BaseAttackPattern
             renderer.material.color = startColor;
         }
 
-
+        
         float time = 0f; 
         while (time < warningTime)
         {

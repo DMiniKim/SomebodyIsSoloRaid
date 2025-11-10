@@ -25,7 +25,7 @@ public class CircleCenterPattern : BaseAttackPattern
         float decalScale = attackRadius;
         // 변수 선언
         GameObject attackRangeDecal = DecalManager.Instance.SpawnDecal(CircleDecalFab, spawnPos, CircleDecalFab.transform.rotation);
-        attackRangeDecal.transform.localPosition = controller.transform.position+new Vector3(0f,0.18f,0f);
+        attackRangeDecal.transform.localPosition = controller.transform.position + new Vector3(0f, 0.18f, 0f);
         GameObject warningDecal = DecalManager.Instance.SpawnDecal(CircleDecalFab, spawnPos, CircleDecalFab.transform.rotation);
         warningDecal.transform.localPosition = controller.transform.position + new Vector3(0f, 0.185f, 0f);
         Renderer[] childRenderers;
@@ -36,19 +36,21 @@ public class CircleCenterPattern : BaseAttackPattern
         //데칼들 초기화
         attackRangeDecal.transform.localScale = new Vector3(attackRadius, 1, attackRadius);
         childRenderers = attackRangeDecal.GetComponentsInChildren<Renderer>();
-        
+
         Color baseColor = Color.white;
         if (childRenderers.Length > 0)
         {
             baseColor = childRenderers[0].sharedMaterial.color;
         }
         Color color = new(baseColor.r, baseColor.g, baseColor.b, startAlpha);
-        
 
-        foreach (Renderer renderer in childRenderers) 
+
+        foreach (Renderer renderer in childRenderers)
         {
             renderer.material.color = color;
         }
+        controller.animator.SetTrigger("HeavyAttack");
+
         float timer = 0f;
         while (timer < watingAttack)
         {
@@ -56,10 +58,17 @@ public class CircleCenterPattern : BaseAttackPattern
             float progress = Mathf.Clamp01(timer / watingAttack);
             Vector3 currentScale = Vector3.Lerp(startScale, targetScale, progress);
             warningDecal.transform.localScale = currentScale;
+            if (progress > 0.9f)
+            {
+                controller.animator.speed = 1.5f;
+            }
             yield return null;
         }
-        warningDecal.transform.localScale = targetScale;
 
+        warningDecal.transform.localScale = targetScale;
+        controller.animator.speed = 1.3f;
+
+        Debug.Log(controller.animator.speed);
 
         //yield return CoroutineManager.WaitForSecond(warningTime);
 

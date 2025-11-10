@@ -1,7 +1,9 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class BossAi : MonoBehaviour
 {
@@ -12,9 +14,10 @@ public class BossAi : MonoBehaviour
     [SerializeField] public Animator animator;
     private bool isMoving = false;              // 공격 flag
     private bool isAttacking = false;           // 이동 flag
+    private bool isFalling = false;             // 공중 flag
     public bool IsMoving { get { return isMoving; } set { isMoving = value; } }
     public bool IsAttacking { get { return isAttacking; } set { isAttacking = value; } }
-
+    public bool IsFalling { get { return isFalling; } set { isFalling = value; } }
     public Rigidbody rb;
 
     // 패턴 담을 리스트
@@ -58,6 +61,17 @@ public class BossAi : MonoBehaviour
             case AIState.Cooldown:
                 // 이것도
                 break;
+        }
+    }
+    private void FixedUpdate()
+    {
+        if(this.transform.position.y >= 10.5f )
+        {
+            isFalling = true;
+        }
+        else
+        {
+            isFalling = false;
         }
     }
     public void ChangeState(AIState newState) // bool이나 enum 상태 변경 함수
@@ -162,9 +176,28 @@ public class BossAi : MonoBehaviour
 
     public void Jump()
     {
+        //rb.useGravity = false;
+        //rb.AddForce(Vector3.up * 100f, ForceMode.Impulse);
         rb.useGravity = false;
-       rb.AddForce(Vector3.up * 100f, ForceMode.Impulse);
-    }
+        rb.linearVelocity = Vector3.zero;
+        GetComponent<Collider>().enabled = false;
 
+        foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+        {
+            renderer.enabled = false;
+        }
+    }
+    public void SlowMotion()
+    {
+        animator.speed = 0.1f;
+    }
+    public void FastMotion()
+    {
+        animator.speed = 1.5f;
+    }
+    public void Nomalization()
+    {
+        animator.speed = 1f;
+    }
 }
 
