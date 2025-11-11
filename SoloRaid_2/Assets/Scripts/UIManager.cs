@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        playerMove
+        //
 
     }
 
