@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textTime;
     [SerializeField] private Image image;
-
+    [SerializeField] private Slider HpSlider;
     
     [SerializeField] PlayerMove playerMove;
     void Awake()
@@ -23,9 +23,13 @@ public class UIManager : MonoBehaviour
             textTime = GetComponentInChildren<TextMeshProUGUI>();
         }
         playerMove = FindAnyObjectByType<PlayerMove>();
+        HpSlider = GetComponentInChildren<Slider>();
+    }
+    private void FixedUpdate()
+    {
+        HpSlider.value = playerMove.currentHealth / playerMove.maxHealth;
     }
 
-    
     private void OnEnable()
     {
         GameEvents.OnDodgeStarted += ShowCooldownUI;
@@ -48,25 +52,22 @@ public class UIManager : MonoBehaviour
 
 
 
-    // 쿨타임이 시작될 때 UI를 활성화하는 메서드
+    
     private void ShowCooldownUI(float maxCooldown)
     {
-        if (image != null) image.gameObject.SetActive(true);
+        if (image != null) 
+            image.gameObject.SetActive(true);
+
         UpdateCooldownText(maxCooldown); // 초기 값 설정
-    }
-
-    // 쿨타임이 업데이트될 때 텍스트를 갱신하는 메서드
+    }    
     private void UpdateCooldownText(float currentTime)
-    {
-        
+    {        
         if (currentTime < 0) currentTime = 0;
-        // 소수점 한 자리까지 표시하거나, 올림 처리를 하는 등 다양하게 표현할 수 있습니다.
-        textTime.text = Mathf.Ceil(currentTime).ToString("F0"); // --- 수정된 부분 ---: currentTime을 매 프레임 업데이트된 값으로 사용합니다.
-    }
-
-    // 쿨타임이 종료될 때 UI를 비활성화하는 메서드
+        
+        textTime.text = Mathf.Ceil(currentTime).ToString("F0"); // 남은 시간을 정수로 표시(반올림)
+    }    
     private void HideCooldownUI()
     {
-        if (image != null) image.gameObject.SetActive(false);
+        if (image != null) image.gameObject.SetActive(false); // 끄기
     }
 }

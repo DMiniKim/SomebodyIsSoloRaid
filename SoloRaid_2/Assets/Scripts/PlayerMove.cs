@@ -11,8 +11,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private bool isMoving = false;
     [SerializeField] private bool isMeleeAction = false;
-    [SerializeField] private float currentHealth;
-    [SerializeField] private float maxHealth;
+    [SerializeField] public float currentHealth;
+    [SerializeField] public float maxHealth;
     [SerializeField] private float damage;
     [SerializeField] AttackTrigger attackTrigger;
     [SerializeField] GameObject triggerCollider;
@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
         dodgeDuration = 0.5f;
         dodgeCooldown = 5f;
         currentHealth = maxHealth;
-        
+
         attackTrigger = GetComponent<AttackTrigger>();
     }
 
@@ -71,7 +71,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update()
-    {       
+    {
         if (Input.GetMouseButtonDown(1) && isMeleeAction == false)                    // 마우스 클릭하면 해당 위치로 이동
         {
             animator.SetBool("IsMove", true);
@@ -110,12 +110,8 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(isDead)
-        {
-
+        if (isDead)
             return;
-        }
-
         if (isDodging)               // 회피 중일 때는 이동하지 않음
             return;
         if (isMoving)               // 마우스 우클릭 시 이동 및 거리 계산 로직
@@ -179,11 +175,14 @@ public class PlayerMove : MonoBehaviour
     }
     public void EnableAttackTrigger()
     {
-        transform.GetChild(0).gameObject.SetActive(true);        
+        transform.GetChild(0).gameObject.SetActive(true);
     }
     public void DisableAttackTrigger()
     {
-        transform.GetChild(0).gameObject.SetActive(false);        
+        transform.GetChild(0).gameObject.SetActive(false);
     }
-
+    public float GetLerpCurrentHealth()
+    {
+        return currentHealth / maxHealth;
+    }
 }

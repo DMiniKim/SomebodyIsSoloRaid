@@ -2,13 +2,9 @@ using System.Collections;
 using UnityEngine;
 
 public class CoolDownManager : MonoBehaviour
-{
-
-
-    // 오브젝트 활성화/비활성화 시 이벤트 구독 및 해지를 관리합니다.
+{    
     private void OnEnable()
-    {
-        // '회피 시작' 이벤트를 구독하여, 해당 이벤트가 발생하면 HandleDodgeStart 코루틴을 실행합니다.
+    {       
         GameEvents.OnDodgeStarted += HandleDodgeStart;
     }
 
