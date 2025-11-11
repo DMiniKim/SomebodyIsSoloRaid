@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,35 +9,44 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textTime;
     [SerializeField] private Image image;
 
+    
+    [SerializeField] PlayerMove playerMove;
     void Awake()
     {
         if (image != null)
         {
             image.gameObject.SetActive(false);
         }
-        // textTime 컴포넌트가 Awake에서 찾아지지 않으면 NullReferenceException 발생 가능성 있음.
-        // 인스펙터에 할당하거나, 안전하게 GetComponent를 사용하는 것이 좋습니다.
+        
         if (textTime == null)
         {
             textTime = GetComponentInChildren<TextMeshProUGUI>();
         }
+        playerMove = FindAnyObjectByType<PlayerMove>();
     }
 
-    // --- 추가된 부분 ---
-    // 필요한 이벤트들을 구독하고 해지합니다.
+    
     private void OnEnable()
     {
         GameEvents.OnDodgeStarted += ShowCooldownUI;
-        GameEvents.OnCooldownUpdated += UpdateCooldownText; // --- 수정된 부분 ---: 쿨타임 업데이트 이벤트를 구독합니다.
+        GameEvents.OnCooldownUpdated += UpdateCooldownText; 
         GameEvents.OnDodgeCooldownFinished += HideCooldownUI;
     }
 
     private void OnDisable()
     {
         GameEvents.OnDodgeStarted -= ShowCooldownUI;
-        GameEvents.OnCooldownUpdated -= UpdateCooldownText; // --- 수정된 부분 ---: 쿨타임 업데이트 이벤트 구독을 해지합니다.
+        GameEvents.OnCooldownUpdated -= UpdateCooldownText; 
         GameEvents.OnDodgeCooldownFinished -= HideCooldownUI;
     }
+    private void Update()
+    {
+        playerMove
+
+    }
+
+
+
 
     // 쿨타임이 시작될 때 UI를 활성화하는 메서드
     private void ShowCooldownUI(float maxCooldown)

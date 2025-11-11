@@ -53,7 +53,7 @@ public class LighteningPattern : BaseAttackPattern
         //float decalScale = strikeRadius;
         GameObject decal = DecalManager.Instance.SpawnDecal(lightningPrefab, position + new Vector3(0f, 0.3f, 0f), lightningPrefab.transform.rotation);
         Renderer[] childRenderers;
-
+        Collider[] childColliders;
         Vector3 targetScale = new Vector3(strikeRadius, 1, strikeRadius);
         Vector3 startScale = targetScale * startScalePercent;
 
@@ -61,6 +61,7 @@ public class LighteningPattern : BaseAttackPattern
 
 
         childRenderers = decal.GetComponentsInChildren<Renderer>();
+        childColliders = decal.GetComponentsInChildren<MeshCollider>();
 
         Color baseColor = Color.white;
         if(childRenderers.Length >0 )
@@ -101,9 +102,18 @@ public class LighteningPattern : BaseAttackPattern
 
         yield return CoroutineManager.WaitForSecond(attackTerm);
 
-        // 데미지 연산
+        foreach (Collider col in childColliders)
+        {
+            col.enabled = true;
+        }
 
-        Collider[] hits = Physics.OverlapSphere(position, strikeRadius, LayerMask.GetMask("Player"));
+        yield return CoroutineManager.WaitForSecond(0.1f);
+        foreach (Collider col in childColliders)
+        {
+            col.enabled = false;
+        }
+
+        
 
 
         DecalManager.Instance.DespawnDecal(decal);

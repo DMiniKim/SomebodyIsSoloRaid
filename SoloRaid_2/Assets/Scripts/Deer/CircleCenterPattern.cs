@@ -29,14 +29,14 @@ public class CircleCenterPattern : BaseAttackPattern
         GameObject warningDecal = DecalManager.Instance.SpawnDecal(CircleDecalFab, spawnPos, CircleDecalFab.transform.rotation);
         warningDecal.transform.localPosition = controller.transform.position + new Vector3(0f, 0.185f, 0f);
         Renderer[] childRenderers;
-
+        Collider[] childColliders;
         Vector3 targetScale = new Vector3(attackRadius, attackRadius, attackRadius);
         Vector3 startScale = targetScale * 0.2f;
 
         //데칼들 초기화
         attackRangeDecal.transform.localScale = new Vector3(attackRadius, 1, attackRadius);
         childRenderers = attackRangeDecal.GetComponentsInChildren<Renderer>();
-
+        childColliders = attackRangeDecal.GetComponentsInChildren<MeshCollider>();
         Color baseColor = Color.white;
         if (childRenderers.Length > 0)
         {
@@ -67,13 +67,16 @@ public class CircleCenterPattern : BaseAttackPattern
 
         warningDecal.transform.localScale = targetScale;
         controller.animator.speed = 1.3f;
-
-        Debug.Log(controller.animator.speed);
-
-        //yield return CoroutineManager.WaitForSecond(warningTime);
-
-        Collider[] hits = Physics.OverlapSphere(spawnPos, attackRadius, LayerMask.GetMask("Player"));
-
+        foreach(Collider col in childColliders)
+        {
+            col.enabled = true;
+        }
+        yield return CoroutineManager.WaitForSecond(0.1f);
+        foreach (Collider col in childColliders)
+        {
+            col.enabled = false;
+        }
+        //Collider[] hits2 = Physics.SphereCast(spawnPos, attackRadius, LayerMask.GetMask("Player"));
         DecalManager.Instance.DespawnDecal(attackRangeDecal);
         DecalManager.Instance.DespawnDecal(warningDecal);
 

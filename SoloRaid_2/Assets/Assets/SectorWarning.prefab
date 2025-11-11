@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440061552572104839}
-  - component: {fileID: 8739232958739172736}
   m_Layer: 0
   m_Name: SectorWarning
   m_TagString: Untagged
@@ -33,19 +32,6 @@ Transform:
   - {fileID: 519719171830277058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8739232958739172736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3615608205645983771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dcaa0636c6ecdb4dba911d346a9d143, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GetVectorSectorPattern
-  Rotation: {x: 0, y: 0, z: 0}
 --- !u!1001 &919714665826673546
 PrefabInstance:
   m_ObjectHideFlags: 0

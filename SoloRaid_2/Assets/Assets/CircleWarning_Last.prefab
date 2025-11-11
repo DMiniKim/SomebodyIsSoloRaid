@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1433901550604422125}
   - component: {fileID: 5706425064327005808}
   - component: {fileID: 1347145157555192634}
+  - component: {fileID: 3683209719044546673}
   m_Layer: 0
   m_Name: Warning 1
   m_TagString: Untagged
@@ -105,13 +106,26 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3683209719044546673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048875571449270098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d7601435d87bd45a9c40fba3520806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackTrigger
+  damage: 10
 --- !u!1 &3253128845435786085
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +138,7 @@ GameObject:
   - component: {fileID: 8165250992800232496}
   - component: {fileID: 5250337613658677245}
   - component: {fileID: 845718001708310457}
+  - component: {fileID: 9213344704675257618}
   m_Layer: 0
   m_Name: CircleWarning1
   m_TagString: Untagged
@@ -217,13 +232,26 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &9213344704675257618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253128845435786085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d7601435d87bd45a9c40fba3520806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackTrigger
+  damage: 10
 --- !u!1 &5701749304584938665
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +299,7 @@ GameObject:
   - component: {fileID: 6201784178109791051}
   - component: {fileID: 6413185696899493692}
   - component: {fileID: 8164961038308916428}
+  - component: {fileID: 5651154291223180919}
   m_Layer: 0
   m_Name: Warning 1 (2)
   m_TagString: Untagged
@@ -364,13 +393,26 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &5651154291223180919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338470981573019069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d7601435d87bd45a9c40fba3520806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackTrigger
+  damage: 10
 --- !u!1 &7339116777147999838
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +425,7 @@ GameObject:
   - component: {fileID: 2496469884475661054}
   - component: {fileID: 8975926134231310413}
   - component: {fileID: 3629863234107312126}
+  - component: {fileID: 4168281641782105911}
   m_Layer: 0
   m_Name: Warning 1 (1)
   m_TagString: Untagged
@@ -476,10 +519,23 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4168281641782105911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339116777147999838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d7601435d87bd45a9c40fba3520806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackTrigger
+  damage: 10

@@ -27,13 +27,13 @@ public class JumpAndDownPattern : BaseAttackPattern
 
         GameObject spawnDecal = DecalManager.Instance.SpawnDecal(jumpSlamPrefab, controller.playerPosition.position + plusTrackingPosition, jumpSlamPrefab.transform.rotation);
         Renderer[] childRenderers;
-
+        Collider[] childColliders;
         Vector3 targetScale = new Vector3(slamRadius, 1, slamRadius);
         Vector3 startScale = targetScale * 0.2f;
 
         spawnDecal.transform.localScale = Vector3.zero;
         childRenderers = spawnDecal.GetComponentsInChildren<Renderer>();
-
+        childColliders = spawnDecal.GetComponentsInChildren<MeshCollider>();
 
         Color baseColor = Color.white;
         if (childRenderers.Length > 0)
@@ -79,6 +79,7 @@ public class JumpAndDownPattern : BaseAttackPattern
         controller.transform.position = fallStartPosition;
         controller.GetComponent<Collider>().enabled = true;
 
+        
         foreach (Renderer r in controller.GetComponentsInChildren<Renderer>())
         {
             r.enabled = true;
@@ -101,9 +102,16 @@ public class JumpAndDownPattern : BaseAttackPattern
         
         controller.transform.position = slamTarget;
         controller.rb.useGravity = true;
-        
+        foreach (Collider col in childColliders)
+        {
+            col.enabled = true;
+        }
 
-        Collider[] hits = Physics.OverlapSphere(slamTarget, slamRadius, LayerMask.GetMask("Player"));
+        yield return CoroutineManager.WaitForSecond(0.1f);
+        foreach (Collider col in childColliders)
+        {
+            col.enabled = false;
+        }
 
         DecalManager.Instance.DespawnDecal(spawnDecal);
     }

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
@@ -8,6 +9,7 @@ using UnityEngine.InputSystem.XR;
 public class BossAi : MonoBehaviour
 {
     public Transform playerPosition;
+    public PlayerMove playerMove;
     [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float attackRange = 15f;       // 이거리 안에 들어오면 패턴 시작
     [SerializeField] private float rotationSpeed = 5f;
@@ -20,9 +22,16 @@ public class BossAi : MonoBehaviour
     public bool IsFalling { get { return isFalling; } set { isFalling = value; } }
     public Rigidbody rb;
 
+    public float currentHealth;
+    public float maxhealth;
+    public float damage;
+
+
+    
+
     // 패턴 담을 리스트
     [SerializeField] private List<BaseAttackPattern> attackPatterns;
-    [SerializeField] private float attackCooldown = 1.5f;         // 공격 쿨타임
+    [SerializeField] private float attackCooldown = 2.5f;         // 공격 쿨타임
 
     private float attackRangeSqr;   // 성능 최적화를 위한 공격 사거리 계산 변수
 
@@ -44,9 +53,13 @@ public class BossAi : MonoBehaviour
         currentState = AIState.Idle;
 
         attackRangeSqr = attackRange * attackRange;
+        playerMove = FindAnyObjectByType<PlayerMove>();
+        currentHealth = maxhealth;
     }
     private void Update()
     {
+        if (playerMove.IsDead)
+            return;
         switch (currentState)
         {
             case AIState.Idle:
@@ -198,6 +211,16 @@ public class BossAi : MonoBehaviour
     public void Nomalization()
     {
         animator.speed = 1f;
+    }
+
+    public void Hit(float damage)
+    {
+        currentHealth -= damage;
+        
+    }
+    public void CurrentHealth()
+    {
+        
     }
 }
 
